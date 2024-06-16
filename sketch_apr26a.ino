@@ -1,18 +1,26 @@
+// Define the analog pin for the IR sensor
+const int irSensorPin = A5;
+
+// Variable to store the sensor value
+int sensorValue = 0;
+
 void setup() {
-  Serial.begin(9600); // Initialize serial communication at 9600 baud rate
+  // Initialize serial communication at 9600 bits per second
+  Serial.begin(9600);
 }
 
 void loop() {
-  int sensorValue = analogRead(A5); // Read the analog voltage from the sensor
-  float voltage = sensorValue * (5.0 / 1023.0); // Convert the sensor value to voltage (assuming 5V Arduino)
+  // Read the analog value from the IR sensor
+  sensorValue = analogRead(irSensorPin);
   
+  // Get the current time in milliseconds
+  unsigned long currentTime = millis();
+  
+  // Print the timestamp, sensor value, and corresponding voltage to the Serial Monitor
+  Serial.print(currentTime);
+  Serial.print(" ");
+  Serial.println(sensorValue);
 
-  Serial.print("Voltage: ");
-  Serial.print(voltage);
-  Serial.println(" V");
-
-  delay(100); // Wait for a second before reading again
+  // Wait for 10 milliseconds before the next loop
+  delay(10);
 }
-// geel = GND
-// Rood = A5
-// Zwart = 5/3.3 V
